@@ -581,7 +581,7 @@ end
 #
 
 # Simple tags
-tag "terms",   "xterm"
+#tag "terms",   "xterm"
 tag "browser", "luakit|chro*"
 
 # Placement
@@ -697,6 +697,30 @@ view "trm", "terms|default"
 view "web",   "browser"
 view "dev",   "editor"
 #view "gimp",  "gimp_.*"
+
+on :start do
+  #views, tags = [Subtlext::View, Subtlext::Tag].map {|k| k.all.map {|c| c.name}}
+  views = Subtlext::View.all.map { |v| v.name }
+  tags = Subtlext::Tag.all.map { |t| t.name }
+
+  views.each do |v|
+    unless tags.include?(v)
+      t = Subtlext::Tag.new(v)
+      t.save
+    end
+  end
+end
+
+on :client_create do |c|
+  view = Subtlext::View.current
+  tags = c.tags.map { |t| t.name }
+
+  view.tag(view.name) unless view.tags.include? view.name
+
+  if tags.include? "default" and tags.size == 1
+    c.tags = [ view.name ]
+  end
+end
 
 #
 # == Sublets
