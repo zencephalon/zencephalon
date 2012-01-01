@@ -336,7 +336,7 @@ grab "W-3", :ViewSwitch3
 grab "W-4", :ViewSwitch4
 
 # Select next and prev view */
-grab "KP_Add",      :ViewNext
+grab "W-Tab",      :ViewNext
 grab "KP_Subtract", :ViewPrev
 
 # Move mouse to screen1, screen2, ...
