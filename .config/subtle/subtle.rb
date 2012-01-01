@@ -324,20 +324,22 @@ gravity :gimp_dock,      [  90,   0,  10, 100 ]
 #
 
 # Jump to view1, view2, ...
-grab "W-S-1", :ViewJump1
-grab "W-S-2", :ViewJump2
-grab "W-S-3", :ViewJump3
-grab "W-S-4", :ViewJump4
+(1..8).each do |n|
+  grab "W-#{n}", "ViewJump#{n+1}".to_sym
+end
 
 # Switch current view
-grab "W-1", :ViewSwitch1
-grab "W-2", :ViewSwitch2
-grab "W-3", :ViewSwitch3
-grab "W-4", :ViewSwitch4
+grab "W-S-1", :ViewSwitch1
+grab "W-S-2", :ViewSwitch2
+grab "W-S-3", :ViewSwitch3
+grab "W-S-4", :ViewSwitch4
+grab "W-S-5", :ViewSwitch5
+grab "W-S-6", :ViewSwitch6
+grab "W-S-7", :ViewSwitch7
 
 # Select next and prev view */
-grab "W-Tab",      :ViewNext
-grab "KP_Subtract", :ViewPrev
+grab "A-Tab", :ViewNext
+grab "W-Tab", :ViewSwitch1
 
 # Move mouse to screen1, screen2, ...
 grab "W-A-1", :ScreenJump1
@@ -580,58 +582,71 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
+tag "1"
+tag "2"
+tag "3"
+tag "4"
+tag "5"
+tag "6"
+tag "7"
+
 # Simple tags
-#tag "terms",   "xterm"
-tag "browser", "luakit|chro*"
-
-# Placement
-tag "editor" do
-  match  "[g]?vim"
-  resize true
-end
-
-tag "fixed" do
-  geometry [ 10, 10, 100, 100 ]
-  stick    true
-end
-
-tag "resize" do
-  match  "sakura|gvim"
-  resize true
-end
-
-tag "gravity" do
-  gravity :center
-end
-
-# Modes
-tag "stick" do
-  match "mplayer"
-  float true
-  stick true
-end
-
-tag "float" do
-  match "display"
-  float true
-end
-
-# Gimp
-tag "gimp_image" do
-  match   :role => "gimp-image-window"
-  gravity :gimp_image
-end
-
-tag "gimp_toolbox" do
-  match   :role => "gimp-toolbox$"
-  gravity :gimp_toolbox
-end
-
-tag "gimp_dock" do
-  match   :role => "gimp-dock"
-  gravity :gimp_dock
-end
-
+#tag "terms" do
+#  match "xterm"
+#  stick true
+#  gravity :top_left
+#end
+#
+#tag "browser", "luakit|chro*"
+#
+## Placement
+#tag "editor" do
+#  match  "[g]?vim"
+#  resize true
+#end
+#
+#tag "fixed" do
+#  geometry [ 10, 10, 100, 100 ]
+#  stick    true
+#end
+#
+#tag "resize" do
+#  match  "sakura|gvim"
+#  resize true
+#end
+#
+#tag "gravity" do
+#  gravity :center
+#end
+#
+## Modes
+#tag "stick" do
+#  match "mplayer"
+#  float true
+#  stick true
+#end
+#
+#tag "float" do
+#  match "display"
+#  float true
+#end
+#
+## Gimp
+#tag "gimp_image" do
+#  match   :role => "gimp-image-window"
+#  gravity :gimp_image
+#end
+#
+#tag "gimp_toolbox" do
+#  match   :role => "gimp-toolbox$"
+#  gravity :gimp_toolbox
+#end
+#
+#tag "gimp_dock" do
+#  match   :role => "gimp-dock"
+#  gravity :gimp_dock
+#end
+#
 #
 # == Views
 #
@@ -693,15 +708,21 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-view "trm", "terms|default"
-view "web",   "browser"
-view "dev",   "editor"
+#view "trm", "default|terms"
+#view "web",   "browser|terms"
+#view "dev",   "editor|terms"
 #view "gimp",  "gimp_.*"
 
+("0".."9").each do |n|
+  view(n) do
+    dynamic true
+  end
+end
+
 on :start do
-  #views, tags = [Subtlext::View, Subtlext::Tag].map {|k| k.all.map {|c| c.name}}
-  views = Subtlext::View.all.map { |v| v.name }
-  tags = Subtlext::Tag.all.map { |t| t.name }
+  views, tags = [Subtlext::View, Subtlext::Tag].map {|k| k.all.map {|c| c.name}}
+  $previous_view = views.first
+  $previous_view_temp = views.first
 
   views.each do |v|
     unless tags.include?(v)
@@ -721,6 +742,14 @@ on :client_create do |c|
     c.tags = [ view.name ]
   end
 end
+
+
+#on :view_jump do |v|
+#  puts "prev:#{$previous_view} temp:#{$previous_view_temp} goto:#{v.name}"
+#  $previous_view = $previous_view_temp
+#  $previous_view_temp = v.name.to_i
+#end
+
 
 #
 # == Sublets
