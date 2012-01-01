@@ -1,0 +1,20 @@
+{
+   "EPmcA7woOtrVWAGuo9c1YLR48mSW8KSLC0bED1BU0JM=": {
+      "created": 1325419667.544774,
+      "expiry": 1341490084.767706,
+      "include_subdomains": false,
+      "mode": "strict"
+   },
+   "bVzOnu6xyelN8iVLDSbFjyZVgXrXDyLSokjnq2hdUFs=": {
+      "created": 1325419844.228847,
+      "expiry": 1328011897.147144,
+      "include_subdomains": false,
+      "mode": "strict"
+   },
+   "mPA/INyvbBufIejotw/nxkqXMSZ6f1+GY8zDuTq0MfE=": {
+      "created": 1325419699.113161,
+      "expiry": 1341490099.113159,
+      "include_subdomains": false,
+      "mode": "strict"
+   }
+}
