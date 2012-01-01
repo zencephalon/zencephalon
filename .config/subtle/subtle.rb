@@ -18,7 +18,7 @@
 # Following options change behaviour and sizes of the window manager:
 #
 # Border size in pixel of the windows
-set :border, 2
+set :border, 1
 
 # Window move/resize steps in pixel per keypress
 set :step, 5
@@ -39,8 +39,8 @@ set :resize, false
 set :strut, [ 0, 0, 0, 0 ]
 
 # Font string either take from e.g. xfontsel or use xft
-set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
-#set :font, "xft:sans-8"
+#set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
+set :font, "xft:envy\ code\ r-8"
 
 # Space around windows
 set :gap, 0
@@ -370,19 +370,19 @@ grab "W-space", :WindowFull
 grab "W-s", :WindowStick
 
 # Raise window
-grab "W-r", :WindowRaise
+grab "W-Up", :WindowRaise
 
 # Lower window
-grab "W-l", :WindowLower
+grab "W-Down", :WindowLower
 
 # Select next windows
-grab "W-Left",  :WindowLeft
-grab "W-Down",  :WindowDown
-grab "W-Up",    :WindowUp
-grab "W-Right", :WindowRight
+grab "W-l",  :WindowLeft
+grab "W-j",  :WindowDown
+grab "W-k",    :WindowUp
+grab "W-h", :WindowRight
 
 # Kill current window
-grab "W-S-k", :WindowKill
+grab "W-S-c", :WindowKill
 
 # Cycle between given gravities
 grab "W-KP_7", [ :top_left,     :top_left66,     :top_left33     ]
@@ -545,7 +545,7 @@ end
 
 # Simple tags
 tag "terms",   "xterm|[u]?rxvt"
-tag "browser", "uzbl|opera|firefox|navigator"
+tag "browser", "uzbl|opera|firefox|navigator|luakit"
 
 # Placement
 tag "editor" do
@@ -656,9 +656,8 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-view "terms", "terms|default"
+view "ter", "terms|default"
 view "www",   "browser"
-view "gimp",  "gimp_.*"
 view "dev",   "editor"
 
 #
