@@ -53,3 +53,11 @@ func (file *File) Read(b []byte) (ret int, err os.Error) {
    }
    return int(r), err
 }
+
+func (file *File) Write(b []byte) (ret int, err os.Error) {
+   if file == nil {
+      return -1, os.EINVAL
+   }
+   r, e := syscall.Write(file.fd, b)
+   if e != 0 {
+      err = os.Errno(e)
