@@ -582,7 +582,7 @@ end
 
 # Simple tags
 tag "terms",   "xterm"
-tag "browser", "luakit"
+tag "browser", "luakit|chro*"
 
 # Placement
 tag "editor" do
