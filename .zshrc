@@ -12,3 +12,8 @@ zstyle :compinstall filename '/home/zen/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+autoload -U colors && colors
+#autoload -U promptinit
+#promptinit
+PROMPT="%{$fg[blue]%}%3~ %{$reset_color%}%# "

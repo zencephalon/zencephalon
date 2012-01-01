@@ -173,7 +173,7 @@ end
 style :subtle do
   margin      0, 0, 0, 0
   panel       "#202020"
-  background  "#3d3d3d"
+  background  "#000000"
   stipple     "#757575"
 end
 
@@ -417,6 +417,7 @@ grab "W-KP_3", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Exec programs
 grab "W-Return", "xterm"
+grab "W-p", "dmenu_run"
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
