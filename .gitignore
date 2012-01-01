@@ -19,3 +19,7 @@
 .purple
 .gstreamer-*
 *.swp
+.zsh_history
+.zsh-update
+.oh-my-zsh
+.wicd

@@ -1,0 +1,16 @@
+Warning: /etc/group or /etc/gshadow are inconsistant.
+    Run 'grpck' to correct this.
+daemoncript has been renamed to /etc/rc.d/cupsd
+change your entry in  /etc/rc.conf
+
+
+ATTENTION:
+This release of subtle (0.10.3008) includes awesome changes that might break your co
+
+In order to use sur you have to install the following dependencies: curb and minitar
+You can use this gem command: 
+  gem install curb minitar
+
+If you have subtles on your system remember to upgrade them doing:
+  sur upgrade 
+
