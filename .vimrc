@@ -28,12 +28,12 @@ filetype plugin indent on
 
 let g:solarized_termcolors=16
 colorscheme solarized
-set guicursor+=a:blinkon0
+"set guicursor+=a:blinkon0
 
 filetype plugin on
 
 set et
-set sw=4
+set sw=3
 set smarttab
 set lbr
 

@@ -37,4 +37,4 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/share/java/apache-ant/bin:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin:/usr/bin/core_perl:/opt/qt/bin
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/share/java/apache-ant/bin:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin:/usr/bin/core_perl:/opt/qt/bin:/var/abs/local/yaourtbuild/go-hg/src/go/bin
