@@ -10,6 +10,9 @@ ZSH_THEME="zen"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias e="gvim"
+alias wi="wicd-curses"
+alias commit="git commit -a -m"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
