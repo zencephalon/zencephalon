@@ -1,6 +1,6 @@
 #
 # Author::  Christoph Kappel <unexist@dorfelite.net>
-# Version:: $Id: data/subtle.rb,v 2736 2011/03/23 16:04:13 unexist $
+# Version:: $Id: data/subtle.rb,v 2978 2011/08/02 11:16:25 unexist $
 # License:: GNU GPLv2
 #
 # = Subtle default configuration
@@ -17,8 +17,6 @@
 #
 # Following options change behaviour and sizes of the window manager:
 #
-# Border size in pixel of the windows
-set :border, 1
 
 # Window move/resize steps in pixel per keypress
 set :step, 5
@@ -26,7 +24,8 @@ set :step, 5
 # Window screen border snapping
 set :snap, 10
 
-# Default starting gravity for windows (0 = gravity of last client)
+# Default starting gravity for windows. Comment out to use gravity of
+# currently active client
 set :gravity, :center
 
 # Make transient windows urgent
@@ -35,24 +34,15 @@ set :urgent, false
 # Honor resize size hints globally
 set :resize, false
 
-# Screen strut for e.g. other panels (left, right, top, bottom)
-set :strut, [ 0, 0, 0, 0 ]
+# Enable gravity tiling
+set :tiling, false
 
 # Font string either take from e.g. xfontsel or use xft
 #set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
 set :font, "xft:envy\ code\ r-8"
 
-# Space around windows
-set :gap, 0
-
-# Panel size padding (left, right, top, bottom)
-set :padding, [ 0, 0, 0, 0 ]
-
 # Separator between sublets
 set :separator, "|"
-
-# Outline border size in pixel of panel items
-set :outline, 0
 
 # Set the WM_NAME of subtle (Java quirk)
 # set :wmname, "LG3D"
@@ -114,68 +104,78 @@ end
 #end
 
 #
-# == Colors
+# == Styles
 #
-# Colors directly define the look of subtle, valid values are:
+# Styles define various properties of styleable items in a CSS-like syntax.
 #
-# [*hexadecimal*] #0000ff
-# [*decimal*]     (0, 0, 255)
-# [*names*]       blue
-#
-# Whenever there is no valid value for a color set - subtle will use a default
-# one. There is only one exception to this: If no background color is given no
-# color will be set. This will ensure a custom background pixmap won't be
-# overwritten.
+# If no background color is given no color will be set. This will ensure a
+# custom background pixmap won't be overwritten.
 #
 # === Link
 #
-# http://subforge.org/projects/subtle/wiki/Themes
+# http://subforge.org/projects/subtle/wiki/Styles
 
-# Colors of focus window title
-color :title_fg,        "#fecf35"
-color :title_bg,        "#202020"
-color :title_border,    "#303030"
+# Style for all style elements
+style :all do
+  background  "#202020"
+  border      "#303030", 0
+  padding     0, 3
+end
 
-# Colors of the active views
-color :focus_fg,        "#fecf35"
-color :focus_bg,        "#202020"
-color :focus_border,    "#303030"
+# Style for the views
+style :views do
 
-# Colors of urgent window titles and views
-color :urgent_fg,       "#ff9800"
-color :urgent_bg,       "#202020"
-color :urgent_border,   "#303030"
+  # Style for the active views
+  style :focus do
+    foreground  "#fecf35"
+  end
 
-# Colors of occupied views (views with clients)
-color :occupied_fg,     "#b8b8b8"
-color :occupied_bg,     "#202020"
-color :occupied_border, "#303030"
+  # Style for urgent window titles and views
+  style :urgent do
+    foreground  "#ff9800"
+  end
 
-# Color of view buttons
-color :views_fg,        "#757575"
-color :views_bg,        "#202020"
-color :views_border,    "#303030"
+  # Style for occupied views (views with clients)
+  style :occupied do
+    foreground  "#b8b8b8"
+  end
 
-# Colors of sublets
-color :sublets_fg,      "#757575"
-color :sublets_bg,      "#202020"
-color :sublets_border,  "#303030"
+  # Style for unoccupied views (views without clients)
+  style :unoccupied do
+    foreground  "#757575"
+  end
+end
 
-# Border colors of active/inactive windows
-color :client_active,   "#303030"
-color :client_inactive, "#202020"
+# Style for sublets
+style :sublets do
+  foreground  "#757575"
+end
 
-# Background colors of panels
-color :panel,           "#202020"
+# Style for separator
+style :separator do
+  foreground  "#757575"
+end
 
-# Background color of root background
-color :background,      "#3d3d3d"
+# Style for focus window title
+style :title do
+  foreground  "#fecf35"
+end
 
-# Color of the stipple (if enabled)
-color :stipple,         "#757575"
+# Style for active/inactive windows
+style :clients do
+  active      "#303030", 2
+  inactive    "#202020", 2
+  margin      0
+  width       50
+end
 
-# Color of the separator
-color :separator,       "#757575"
+# Style for subtle
+style :subtle do
+  margin      0, 0, 0, 0
+  panel       "#202020"
+  background  "#3d3d3d"
+  stipple     "#757575"
+end
 
 #
 # == Gravities
@@ -200,55 +200,55 @@ color :separator,       "#757575"
 # http://subforge.org/projects/subtle/wiki/Gravity
 #
 
-  # Top left
+# Top left
 gravity :top_left,       [   0,   0,  50,  50 ]
 gravity :top_left66,     [   0,   0,  50,  66 ]
 gravity :top_left33,     [   0,   0,  50,  34 ]
 
-  # Top
+# Top
 gravity :top,            [   0,   0, 100,  50 ]
 gravity :top66,          [   0,   0, 100,  66 ]
 gravity :top33,          [   0,   0, 100,  34 ]
 
-  # Top right
-gravity :top_right,      [ 100,   0,  50,  50 ]
-gravity :top_right66,    [ 100,   0,  50,  66 ]
-gravity :top_right33,    [ 100,   0,  50,  34 ]
+# Top right
+gravity :top_right,      [  50,   0,  50,  50 ]
+gravity :top_right66,    [  50,   0,  50,  66 ]
+gravity :top_right33,    [  50,   0,  50,  33 ]
 
-  # Left
+# Left
 gravity :left,           [   0,   0,  50, 100 ]
-gravity :left66,         [   0,  50,  50,  34 ]
-gravity :left33,         [   0,  50,  25,  34 ]
+gravity :left66,         [   0,   0,  66, 100 ]
+gravity :left33,         [   0,   0,  33, 100 ]
 
-  # Center
+# Center
 gravity :center,         [   0,   0, 100, 100 ]
-gravity :center66,       [   0,  50, 100,  34 ]
-gravity :center33,       [  50,  50,  50,  34 ]
+gravity :center66,       [  17,  17,  66,  66 ]
+gravity :center33,       [  33,  33,  33,  33 ]
 
-  # Right
-gravity :right,          [ 100,   0,  50, 100 ]
-gravity :right66,        [ 100,  50,  50,  34 ]
-gravity :right33,        [ 100,  50,  25,  34 ]
+# Right
+gravity :right,          [  50,   0,  50, 100 ]
+gravity :right66,        [  34,   0,  66, 100 ]
+gravity :right33,        [  67,  50,  33, 100 ]
 
-  # Bottom left
-gravity :bottom_left,    [   0, 100,  50,  50 ]
-gravity :bottom_left66,  [   0, 100,  50,  66 ]
-gravity :bottom_left33,  [   0, 100,  50,  34 ]
+# Bottom left
+gravity :bottom_left,    [   0,  50,  50,  50 ]
+gravity :bottom_left66,  [   0,  34,  50,  66 ]
+gravity :bottom_left33,  [   0,  67,  50,  33 ]
 
-  # Bottom
-gravity :bottom,         [   0, 100, 100,  50 ]
-gravity :bottom66,       [   0, 100, 100,  66 ]
-gravity :bottom33,       [   0, 100, 100,  34 ]
+# Bottom
+gravity :bottom,         [   0,  50, 100,  50 ]
+gravity :bottom66,       [   0,  34, 100,  66 ]
+gravity :bottom33,       [   0,  67, 100,  33 ]
 
-  # Bottom right
-gravity :bottom_right,   [ 100, 100,  50,  50 ]
-gravity :bottom_right66, [ 100, 100,  50,  66 ]
-gravity :bottom_right33, [ 100, 100,  50,  34 ]
+# Bottom right
+gravity :bottom_right,   [  50,  50,  50,  50 ]
+gravity :bottom_right66, [  50,  34,  50,  66 ]
+gravity :bottom_right33, [  50,  67,  50,  33 ]
 
-  # Gimp
-gravity :gimp_image,     [  50,  50,  80, 100 ]
+# Gimp
+gravity :gimp_image,     [  10,   0,  80, 100 ]
 gravity :gimp_toolbox,   [   0,   0,  10, 100 ]
-gravity :gimp_dock,      [ 100,   0,  10, 100 ]
+gravity :gimp_dock,      [  90,   0,  10, 100 ]
 
 #
 # == Grabs
@@ -369,6 +369,9 @@ grab "W-space", :WindowFull
 # Toggle sticky mode of window (will be visible on all views)
 grab "W-s", :WindowStick
 
+# Toggle zaphod mode of window (will span across all screens)
+grab "W-equal", :WindowZaphod
+
 # Raise window
 grab "W-Up", :WindowRaise
 
@@ -376,10 +379,10 @@ grab "W-Up", :WindowRaise
 grab "W-Down", :WindowLower
 
 # Select next windows
-grab "W-l",  :WindowLeft
+grab "W-h",  :WindowLeft
 grab "W-j",  :WindowDown
 grab "W-k",    :WindowUp
-grab "W-h", :WindowRight
+grab "W-l", :WindowRight
 
 # Kill current window
 grab "W-S-c", :WindowKill
@@ -466,77 +469,110 @@ end
 #
 # === Properties
 #
-# [*float*]     This property either sets the tagged client floating or prevents
-#               it from being floating depending on the value.
+# [*borderless*] This property enables the borderless mode for tagged clients.
 #
-#               Example: float true
+#                Example: borderless true
+#                Links:    http://subforge.org/projects/subtle/wiki/Tagging#Borderless
+#                          http://subforge.org/projects/subtle/wiki/Clients#Borderless
 #
-# [*full*]      This property either sets the tagged client to fullscreen or
-#               prevents it from being set to fullscreen depending on the value.
+# [*fixed*]      This property enables the fixed mode for tagged clients.
 #
-#               Example: full true
+#                Example: fixed true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Fixed
+#                         http://subforge.org/projects/subtle/wiki/Clients#Fixed
 #
-# [*geometry*]  This property sets a certain geometry as well as floating mode
-#               to the tagged client, but only on views that have this tag too.
-#               It expects an array with x, y, width and height values whereas
-#               width and height must be >0.
+# [*float*]      This property enables the float mode for tagged clients.
 #
-#               Example: geometry [100, 100, 50, 50]
+#                Example: float true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Float
+#                         http://subforge.org/projects/subtle/wiki/Clients#Float
 #
-# [*gravity*]   This property sets a certain to gravity to the tagged client,
-#               but only on views that have this tag too.
+# [*full*]       This property enables the fullscreen mode for tagged clients.
 #
-#              Example: gravity :center
+#                Example: full true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Fullscreen
+#                         http://subforge.org/projects/subtle/wiki/Clients#Fullscreen
 #
-# [*match*]    This property adds matching patterns to a tag, a tag can have
-#              more than one. Matching works either via plaintext, regex
-#              (see man regex(7)) or window id. Per default tags will only
-#              match the WM_NAME and the WM_CLASS portion of a client, this
-#              can be changed with following possible values:
+# [*geometry*]   This property sets a certain geometry as well as floating mode
+#                to the tagged client, but only on views that have this tag too.
+#                It expects an array with x, y, width and height values whereas
+#                width and height must be >0.
 #
-#              [*:name*]      Match the WM_NAME
-#              [*:instance*]  Match the first (instance) part from WM_CLASS
-#              [*:class*]     Match the second (class) part from WM_CLASS
-#              [*:role*]      Match the window role
+#                Example: geometry [100, 100, 50, 50]
+#                Link:    http://subforge.org/projects/subtle/wiki/Tagging#Geometry
 #
-#              Example: match :instance => "urxvt"
-#                       match [:role, :class] => "test"
-#                       match "[xa]+term"
+# [*gravity*]    This property sets a certain to gravity to the tagged client,
+#                but only on views that have this tag too.
 #
-# [*exclude*]  This property works exactly the same way as *match*, but it
-#              excludes clients that match from this tag. That can be helpful
-#              with catch-all tags e.g. for console apps.
+#                Example: gravity :center
+#                Link:    http://subforge.org/projects/subtle/wiki/Tagging#Gravity
 #
-#              Example: exclude :instance => "irssi"
+# [*match*]      This property adds matching patterns to a tag, a tag can have
+#                more than one. Matching works either via plaintext, regex
+#                (see man regex(7)) or window id. Per default tags will only
+#                match the WM_NAME and the WM_CLASS portion of a client, this
+#                can be changed with following possible values:
 #
-# [*resize*]   This property either enables or disables honoring of client
-#              resize hints and is independent of the global option.
+#                [*:name*]      Match the WM_NAME
+#                [*:instance*]  Match the first (instance) part from WM_CLASS
+#                [*:class*]     Match the second (class) part from WM_CLASS
+#                [*:role*]      Match the window role
+#                [*:type*]      Match the window type
 #
-#              Example: resize true
+#                Examples: match instance: "urxvt"
+#                          match [:role, :class] => "test"
+#                          match "[xa]+term"
+#                Link:     http://subforge.org/projects/subtle/wiki/Tagging#Match
 #
-# [*stick*]    This property either sets the tagged client to stick or prevents
-#              it from being set to stick depending on the value. Stick clients
-#              are visible on every view.
+# [*position*]   Similar to the geometry property, this property just sets the
+#                x/y coordinates of the tagged client, but only on views that
+#                have this tag, too. It expects an array with x and y values.
 #
-#              Example: stick true
+#                Example: position [ 10, 10 ]
+#                Link:    http://subforge.org/projects/subtle/wiki/Tagging#Position
 #
-# [*type*]     This property sets the [[Tagging|tagged]] client to be treated
-#              as a specific window type though as the window sets the type
-#              itself. Following types are possible:
+# [*resize*]     This property enables the float mode for tagged clients.
 #
-#              [*:desktop*]  Treat as desktop window (_NET_WM_WINDOW_TYPE_DESKTOP)
-#              [*:dock*]     Treat as dock window (_NET_WM_WINDOW_TYPE_DOCK)
-#              [*:toolbar*]  Treat as toolbar windows (_NET_WM_WINDOW_TYPE_TOOLBAR)
-#              [*:splash*]   Treat as splash window (_NET_WM_WINDOW_TYPE_SPLASH)
-#              [*:dialog*]   Treat as dialog window (_NET_WM_WINDOW_TYPE_DIALOG)
+#                Example: resize true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Resize
+#                         http://subforge.org/projects/subtle/wiki/Clients#Resize
 #
-#              Example: type :desktop
+# [*stick*]      This property enables the float mode for tagged clients.
 #
-# [*urgent*]   This property either sets the tagged client to be urgent or
-#              prevents it from being urgent depending on the value. Urgent
-#              clients will get keyboard and mouse focus automatically.
+#                Example: stick true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Stick
+#                         http://subforge.org/projects/subtle/wiki/Clients#Stick
 #
-#              Example: urgent true
+# [*type*]       This property sets the tagged client to be treated as a specific
+#                window type though as the window sets the type itself. Following
+#                types are possible:
+#
+#                [*:desktop*]  Treat as desktop window (_NET_WM_WINDOW_TYPE_DESKTOP)
+#                              Link: http://subforge.org/projects/subtle/wiki/Clients#Desktop
+#                [*:dock*]     Treat as dock window (_NET_WM_WINDOW_TYPE_DOCK)
+#                              Link: http://subforge.org/projects/subtle/wiki/Clients#Dock
+#                [*:toolbar*]  Treat as toolbar windows (_NET_WM_WINDOW_TYPE_TOOLBAR)
+#                              Link: http://subforge.org/projects/subtle/wiki/Clients#Toolbar
+#                [*:splash*]   Treat as splash window (_NET_WM_WINDOW_TYPE_SPLASH)
+#                              Link: http://subforge.org/projects/subtle/wiki/Clients#Splash
+#                [*:dialog*]   Treat as dialog window (_NET_WM_WINDOW_TYPE_DIALOG)
+#                              Link: http://subforge.org/projects/subtle/wiki/Clients#Dialog
+#
+#                Example: type :desktop
+#                Link:    http://subforge.org/projects/subtle/wiki/Tagging#Type
+#
+# [*urgent*]     This property enables the urgent mode for tagged clients.
+#
+#                Example: stick true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Stick
+#                         http://subforge.org/projects/subtle/wiki/Clients#Urgent
+#
+# [*zaphod*]     This property enables the zaphod mode for tagged clients.
+#
+#                Example: zaphod true
+#                Links:   http://subforge.org/projects/subtle/wiki/Tagging#Zaphod
+#                         http://subforge.org/projects/subtle/wiki/Clients#Zaphod
+#
 #
 # === Link
 #
@@ -544,8 +580,8 @@ end
 #
 
 # Simple tags
-tag "terms",   "xterm|[u]?rxvt"
-tag "browser", "uzbl|opera|firefox|navigator|luakit"
+tag "terms",   "xterm"
+tag "browser", "luakit"
 
 # Placement
 tag "editor" do
@@ -656,9 +692,10 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-view "ter", "terms|default"
-view "www",   "browser"
+view "trm", "terms|default"
+view "web",   "browser"
 view "dev",   "editor"
+#view "gimp",  "gimp_.*"
 
 #
 # == Sublets

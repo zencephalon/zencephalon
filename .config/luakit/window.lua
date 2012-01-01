@@ -315,6 +315,26 @@ window.methods = {
         end
     end,
 
+    del_backward_char = function (w)
+        local i = w.ibar.input
+        local text = i.text
+        local pos = i.position
+
+        if pos > 1 then
+            i.text = string.sub(text, 0, pos - 1) .. string.sub(text, pos + 1)
+            i.position = pos - 1
+        end
+    end,
+
+    del_forward_char = function (w)
+        local i = w.ibar.input
+        local text = i.text
+        local pos = i.position
+
+        i.text = string.sub(text, 0, pos) .. string.sub(text, pos + 2)
+        i.position = pos
+    end,
+
     beg_line = function (w)
         local i = w.ibar.input
         i.position = 1
@@ -665,6 +685,8 @@ window.methods = {
         -- Generate luakit launch command.
         local args = {({string.gsub(luakit.execpath, " ", "\\ ")})[1]}
         if luakit.verbose then table.insert(args, "-v") end
+        -- Relaunch without libunique bindings?
+        if luakit.nounique then table.insert(args, "-U") end
 
         -- Get new config path
         local conf
