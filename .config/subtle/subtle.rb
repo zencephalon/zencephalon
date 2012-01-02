@@ -35,7 +35,7 @@ set :urgent, false
 set :resize, false
 
 # Enable gravity tiling
-set :tiling, false
+set :tiling, true
 
 # Font string either take from e.g. xfontsel or use xft
 #set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
@@ -93,7 +93,7 @@ set :separator, "|"
 #
 
 screen 1 do
-  top    [ :views, :title, :spacer, :keychain, :spacer, :tray, :sublets ]
+  top    [:views, :spacer, :title]
   bottom [ ]
 end
 
@@ -119,7 +119,7 @@ end
 style :all do
   background  "#202020"
   border      "#303030", 0
-  padding     0, 3
+  padding     0, 8
 end
 
 # Style for the views
@@ -324,18 +324,20 @@ gravity :gimp_dock,      [  90,   0,  10, 100 ]
 #
 
 # Jump to view1, view2, ...
-(1..8).each do |n|
+#
+
+(0..9).each do |n|
   grab "W-#{n}", "ViewJump#{n+1}".to_sym
 end
 
 # Switch current view
-grab "W-S-1", :ViewSwitch1
-grab "W-S-2", :ViewSwitch2
-grab "W-S-3", :ViewSwitch3
-grab "W-S-4", :ViewSwitch4
-grab "W-S-5", :ViewSwitch5
-grab "W-S-6", :ViewSwitch6
-grab "W-S-7", :ViewSwitch7
+#grab "W-S-1", :ViewSwitch1
+#grab "W-S-2", :ViewSwitch2
+#grab "W-S-3", :ViewSwitch3
+#grab "W-S-4", :ViewSwitch4
+#grab "W-S-5", :ViewSwitch5
+#grab "W-S-6", :ViewSwitch6
+#grab "W-S-7", :ViewSwitch7
 
 # Select next and prev view */
 grab "A-Tab", :ViewNext
@@ -582,13 +584,9 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-tag "1"
-tag "2"
-tag "3"
-tag "4"
-tag "5"
-tag "6"
-tag "7"
+("0".."9").each do |n|
+  tag n
+end
 
 # Simple tags
 #tag "terms" do
@@ -719,18 +717,18 @@ tag "7"
   end
 end
 
-on :start do
-  views, tags = [Subtlext::View, Subtlext::Tag].map {|k| k.all.map {|c| c.name}}
-  $previous_view = views.first
-  $previous_view_temp = views.first
-
-  views.each do |v|
-    unless tags.include?(v)
-      t = Subtlext::Tag.new(v)
-      t.save
-    end
-  end
-end
+#on :start do
+#  views, tags = [Subtlext::View, Subtlext::Tag].map {|k| k.all.map {|c| c.name}}
+#  $previous_view = views.first
+#  $previous_view_temp = views.first
+#
+#  views.each do |v|
+#    unless tags.include?(v)
+#      t = Subtlext::Tag.new(v)
+#      t.save
+#    end
+#  end
+#end
 
 on :client_create do |c|
   view = Subtlext::View.current
