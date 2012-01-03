@@ -29,9 +29,13 @@ screen 1 do
   bottom [ ]
 end
 
+BACKGROUND = "#202020"
+FOREGROUND = "#fecf35"
+FOREGROUND_NORMAL = "#757575"
+
 # Style for all style elements
 style :all do
-  background  "#202020"
+  background  BACKGROUND
   border      "#303030", 0
   padding     0, 8
 end
@@ -41,7 +45,7 @@ style :views do
 
   # Style for the active views
   style :focus do
-    foreground  "#fecf35"
+    foreground  FOREGROUND
   end
 
   # Style for urgent window titles and views
@@ -56,29 +60,29 @@ style :views do
 
   # Style for unoccupied views (views without clients)
   style :unoccupied do
-    foreground  "#757575"
+    foreground  FOREGROUND_NORMAL
   end
 end
 
 # Style for sublets
 style :sublets do
-  foreground  "#757575"
+  foreground  FOREGROUND_NORMAL
 end
 
 # Style for separator
 style :separator do
-  foreground  "#757575"
+  foreground  FOREGROUND_NORMAL
 end
 
 # Style for focus window title
 style :title do
-  foreground  "#fecf35"
+  foreground  FOREGROUND
 end
 
 # Style for active/inactive windows
 style :clients do
   active      "#303030", 2
-  inactive    "#202020", 2
+  inactive    BACKGROUND, 2
   margin      0
   width       50
 end
@@ -86,9 +90,86 @@ end
 # Style for subtle
 style :subtle do
   margin      0, 0, 0, 0
-  panel       "#202020"
+  panel       BACKGROUND
   background  "#000000"
-  stipple     "#757575"
+  stipple     FOREGROUND_NORMAL
+end
+
+(0..9).each do |n|
+  grab "W-#{n}", "ViewJump#{n+1}".to_sym
+end
+
+# Select next and prev view */
+grab "A-Tab", :ViewNext
+grab "W-Tab", :ViewSwitch1
+
+# Force reload of config and sublets
+grab "W-C-r", :SubtleReload
+
+# Force restart of subtle
+grab "W-C-S-r", :SubtleRestart
+
+# Quit subtle
+grab "W-C-q", :SubtleQuit
+
+# Move current window
+grab "W-B1", :WindowMove
+
+# Resize current window
+grab "W-B3", :WindowResize
+
+# Toggle floating mode of window
+grab "W-f", :WindowFloat
+
+# Toggle fullscreen mode of window
+grab "W-space", :WindowFull
+
+# Toggle sticky mode of window (will be visible on all views)
+grab "W-s", :WindowStick
+
+# Toggle zaphod mode of window (will span across all screens)
+grab "W-equal", :WindowZaphod
+
+# Raise window
+grab "W-Up", :WindowRaise
+
+# Lower window
+grab "W-Down", :WindowLower
+
+# Select next windows
+grab "W-h",  :WindowLeft
+grab "W-j",  :WindowDown
+grab "W-k",    :WindowUp
+grab "W-l", :WindowRight
+
+# Kill current window
+grab "W-S-c", :WindowKill
+
+# Exec programs
+grab "W-Return", "xterm"
+grab "W-p", "dmenu_run -p \">\" -nb \"#{BACKGROUND}\" -nf \"#{FOREGROUND}\" -sb \"#{FOREGROUND}\" -sf \"#{BACKGROUND}\""
+
+#Create the tags
+("0".."9").each do |n|
+  tag n
+end
+
+# Create the views.
+("0".."9").each do |n|
+  view(n) do
+    dynamic true
+  end
+end
+
+on :client_create do |c|
+  view = Subtlext::View.current
+  tags = c.tags.map { |t| t.name }
+
+  view.tag(view.name) unless view.tags.include? view.name
+
+  if tags.include? "default" and tags.size == 1
+    c.tags = [ view.name ]
+  end
 end
 
 # Top left
@@ -141,56 +222,6 @@ gravity :gimp_image,     [  10,   0,  80, 100 ]
 gravity :gimp_toolbox,   [   0,   0,  10, 100 ]
 gravity :gimp_dock,      [  90,   0,  10, 100 ]
 
-(0..9).each do |n|
-  grab "W-#{n}", "ViewJump#{n+1}".to_sym
-end
-
-# Select next and prev view */
-grab "A-Tab", :ViewNext
-grab "W-Tab", :ViewSwitch1
-
-# Force reload of config and sublets
-grab "W-C-r", :SubtleReload
-
-# Force restart of subtle
-grab "W-C-S-r", :SubtleRestart
-
-# Quit subtle
-grab "W-C-q", :SubtleQuit
-
-# Move current window
-grab "W-B1", :WindowMove
-
-# Resize current window
-grab "W-B3", :WindowResize
-
-# Toggle floating mode of window
-grab "W-f", :WindowFloat
-
-# Toggle fullscreen mode of window
-grab "W-space", :WindowFull
-
-# Toggle sticky mode of window (will be visible on all views)
-grab "W-s", :WindowStick
-
-# Toggle zaphod mode of window (will span across all screens)
-grab "W-equal", :WindowZaphod
-
-# Raise window
-grab "W-Up", :WindowRaise
-
-# Lower window
-grab "W-Down", :WindowLower
-
-# Select next windows
-grab "W-h",  :WindowLeft
-grab "W-j",  :WindowDown
-grab "W-k",    :WindowUp
-grab "W-l", :WindowRight
-
-# Kill current window
-grab "W-S-c", :WindowKill
-
 # Cycle between given gravities
 grab "W-KP_7", [ :top_left,     :top_left66,     :top_left33     ]
 grab "W-KP_8", [ :top,          :top66,          :top33          ]
@@ -201,30 +232,3 @@ grab "W-KP_6", [ :right,        :right66,        :right33        ]
 grab "W-KP_1", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
 grab "W-KP_2", [ :bottom,       :bottom66,       :bottom33       ]
 grab "W-KP_3", [ :bottom_right, :bottom_right66, :bottom_right33 ]
-
-# Exec programs
-grab "W-Return", "xterm"
-grab "W-p", "dmenu_run -p \">\" -nb \"#202020\" -nf \"#fecf35\" -sb \"#fecf35\" -sf \"#202020\""
-
-#Create the tags
-("0".."9").each do |n|
-  tag n
-end
-
-# Create the views.
-("0".."9").each do |n|
-  view(n) do
-    dynamic true
-  end
-end
-
-on :client_create do |c|
-  view = Subtlext::View.current
-  tags = c.tags.map { |t| t.name }
-
-  view.tag(view.name) unless view.tags.include? view.name
-
-  if tags.include? "default" and tags.size == 1
-    c.tags = [ view.name ]
-  end
-end
