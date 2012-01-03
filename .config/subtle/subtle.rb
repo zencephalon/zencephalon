@@ -12,10 +12,10 @@ set :gravity, :center
 set :urgent, false
 
 # Honor resize size hints globally
-set :resize, true
+set :resize, false
 
 # Enable gravity tiling
-set :tiling, true
+set :tiling, false
 
 # Font string either take from e.g. xfontsel or use xft
 #set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
@@ -204,7 +204,7 @@ grab "W-KP_3", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Exec programs
 grab "W-Return", "xterm"
-grab "W-p", "dmenu_run"
+grab "W-p", "dmenu_run -p \">\" -nb \"#202020\" -nf \"#fecf35\" -sb \"#fecf35\" -sf \"#202020\""
 
 #Create the tags
 ("0".."9").each do |n|
