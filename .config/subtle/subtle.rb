@@ -1,22 +1,16 @@
 # Window move/resize steps in pixel per keypress
 set :step, 5
-
 # Window screen border snapping
 set :snap, 10
-
 # Default starting gravity for windows. Comment out to use gravity of
 # currently active client
 set :gravity, :center
-
 # Make transient windows urgent
 set :urgent, false
-
 # Honor resize size hints globally
 set :resize, false
-
 # Enable gravity tiling
 set :tiling, false
-
 # Font string either take from e.g. xfontsel or use xft
 #set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
 set :font, "xft:envy\ code\ r-8"
@@ -30,6 +24,7 @@ screen 1 do
 end
 
 BACKGROUND = "#202020"
+DESKTOP_BACKGROUND = "#202020"
 FOREGROUND = "#fecf35"
 FOREGROUND_NORMAL = "#757575"
 
@@ -42,22 +37,18 @@ end
 
 # Style for the views
 style :views do
-
   # Style for the active views
   style :focus do
     foreground  FOREGROUND
   end
-
   # Style for urgent window titles and views
   style :urgent do
     foreground  "#ff9800"
   end
-
   # Style for occupied views (views with clients)
   style :occupied do
     foreground  "#b8b8b8"
   end
-
   # Style for unoccupied views (views without clients)
   style :unoccupied do
     foreground  FOREGROUND_NORMAL
@@ -91,10 +82,11 @@ end
 style :subtle do
   margin      0, 0, 0, 0
   panel       BACKGROUND
-  background  "#000000"
+  background  DESKTOP_BACKGROUND
   stipple     FOREGROUND_NORMAL
 end
 
+# Create hot keys for win-(0..9) to viewjump.
 (0..9).each do |n|
   grab "W-#{n}", "ViewJump#{n+1}".to_sym
 end
@@ -149,7 +141,7 @@ grab "W-S-c", :WindowKill
 grab "W-Return", "xterm"
 grab "W-p", "dmenu_run -p \">\" -nb \"#{BACKGROUND}\" -nf \"#{FOREGROUND}\" -sb \"#{FOREGROUND}\" -sf \"#{BACKGROUND}\""
 
-#Create the tags
+# Create the tags
 ("0".."9").each do |n|
   tag n
 end
