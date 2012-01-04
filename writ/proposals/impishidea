@@ -1,0 +1,29 @@
+Dear Imps,
+
+For those of you I haven't had the chance to meet and interact with, I'm Matthias Bundai. I started II to improve writing through criticism. Now that a few years have passed I wish to, with your permission, reshape the site.
+
+I have concerns I will raise in order of importance. Then I will explain my proposal and how it addresses my concerns.
+
+h2. Sustainability
+
+As you may know II has been advertisement free. One incarnation of the forum briefly showed ads. Philosophically I am opposed to advertisements, so I view them as entirely out of the question as way of sustaining II. That said, I don't want to finance II. Nor do I want member contributions to finance II. II is here for you to enjoy, free of charge.
+
+I don't want to continue financing II myself because I want II to have room to grow in size independent of my budget. Right now II runs on servers I can afford, not necessarily servers that meet its current or future demands.
+
+h2. Accessibility, Complexity, and Speed
+
+I've come to strongly believe that a website should be human readable in any form. This includes just reading the source code without a browser. There are currently some website that meet that standard. II is not one of them. The great thing about readable HTML markup is that it doesn't take much styling (CSS) to make it readable in a browser.
+
+I want to avoid a trend I've noticed in many websites of increased complexity (which results in less readable source code) and slower loading times. Most websites these days load many JavaScript files that make small cosmetic enhancements. In my opinion, those cosmetics are not worth it. The more complicated a website is, the slower it will load. I've been very proud of how fast II loads, but I want to make it even faster.
+
+Cosmetic enhancements also cost bandwidth. I've lived in the US where internet access is relatively cheap and easy to come by, but for someone living in a country with limited internet access loading a 14 kilobyte website (II main page currently) is much better than loading a 143 kilobyte website.
+
+If you ever want to have your mind blown, compare the source code of II's homepage to that of HuffingtonPost.
+
+h2. Community Involvement
+
+I would like II to be run by the community. Currently its internal workings are complicated, so there is a barrier to contribution. I would like to simplify the operation of II enough (and write great explanations of the process) so that new and old members alike can contribute.
+
+h2. Proposal
+
+I plan to strip II down to the bare-bones and use "Readability":http://readability.com for cosmetics. 
