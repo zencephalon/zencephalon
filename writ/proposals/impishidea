@@ -26,4 +26,8 @@ I would like II to be run by the community. Currently its internal workings are 
 
 h2. Proposal
 
-I plan to strip II down to the bare-bones and use "Readability":http://readability.com for cosmetics. 
+I plan to strip II down to the bare-bones and use "Readability":http://readability.com for cosmetics. This offloads the complexity of presentation to Readability, allowing II to be _fast_. And Readability generates some amount of income.
+
+h2. Monetary operation of II
+
+If II makes money I promise that it will reinvested into II. This is how I believe a non-profit should be run, and I intend to run II as a non-profit. I don't think it would be fair if any single person profited from the work done by the community. Certainly I should not seek monetary gain from the articles that you have written.
