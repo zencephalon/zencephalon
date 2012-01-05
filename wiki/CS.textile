@@ -1,0 +1,9 @@
+"Good source of algorithms":http://www.keithschwarz.com/
+"Quines on C2 wiki":http://c2.com/cgi/wiki?QuineProgram
+"Another cool quine page":http://www.nyx.net/~gthompso/quine.htm
+
+"SDL Tutorials":http://lazyfoo.net/SDL_tutorials/
+
+Fundamental Operations:
+0. Relation / Definition
+1. Operation / Transformation

@@ -1,0 +1,21 @@
+The basic idea of simultaneous chess is that nobody moves first. Instead, moves are made simultaneously with the help of an unbiased 3rd party (easily obtained in the form of a computer these days).
+
+This is inspired in part by my experiment with SimultaneousGo which is almost _too_ hard. From an AI perspective, SimulatenousChess is much more interesting than normal chess (in my opinion), because you have to analyze not only your own moves but your opponents moves at the same time. The state space of possible moves goes from about 33 on average to 33*33~? Just a ballpark estimation. I've only begun to explore the strategic implications of SimultaneousChess, but I love that it has no first move advantage.
+
+Rules:
+1. Each player must make a move each turn.
+2. A board with two kings on it is a draw.
+3. Two kings mutually annihilating is a draw.
+4. Capturing the opponent's king is a win.
+Capturing:
+4. A moving piece landing on a stationary piece is a capture, as in normal chess.
+5. Two moving pieces landing on a single square are annihilated.
+
+I'm still figuring out a lot of the rules. "En passants":en.wikipedia.org/wiki/En_passant are one example of a tricky area. I think they may simply be removed?
+
+One interesting aspect of SimulChess is you haven't won the game just by putting someone in a "checkmate". Consider the following board position.
+[[chess01.gif]]
+
+Although this situation is totally helpless for white in the long run, white won't immediately lose unless they surrender. White has five possible moves. If he picks his move randomly, he has basically a 80% chance of survival, because black has to move one of his rooks to exactly where the white king will be to capture.
+
+SimulChess also features the possibility for poker-style mindgames. For instance, if your king is checked you don't necessarily have to move it, in fact you may prefer not to. After all, if your opponent assumes that you will move your king so as to not lose the game, then they probably won't bother attacking the king's position. Of course, this gambit applies to pieces other than the king too. So you see, every move is rife with game-theoretic goodness.

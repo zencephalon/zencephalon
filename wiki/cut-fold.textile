@@ -1,0 +1,26 @@
+Identity, cut, fold, choice are sufficient for programming.
+
+identity:
+0 -> 0
+Identity is the base unit of information
+
+cut:
+(0) -> 1
+
+The cut represents a dimension of time/computation. () is basically a quote operation that delays computation.
+You can derive the integers from this. This is just the Church-Numeral or Peano-Arithmetic.
+((0)) -> 2
+(((0))) -> 3
+
+fold:
+x,y 0 -> x
+x,y 1 -> y
+
+From this you can get space and rationals.
+(0),((0)) -> 1/2
+((0)),(((0))) -> 2/3
+
+choice:
+(x):() -> x
+(x):,0 -> 0
+x,y:0

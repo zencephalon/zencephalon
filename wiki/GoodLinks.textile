@@ -1,0 +1,1 @@
+"An excellent explanation of Bayes' Theorem":http://yudkowsky.net/rational/bayes

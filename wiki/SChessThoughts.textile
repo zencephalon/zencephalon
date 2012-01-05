@@ -1,0 +1,204 @@
+3 hours agoJoshua Orion Skylar Hickman
+The comment describing poker-style mindgames is by far the most interesting part
+
+3 hours agoMatthew Bunday
+yeah, I thought so too
+I can see queen-duels becoming so intense
+they already are in normal chess
+
+3 hours agoJoshua Orion Skylar Hickman
+I've got a feeling just about every part of this game will be bluffs on top of bluffs
+
+3 hours agoMatthew Bunday
+yes
+the only way to capture the king seems to be to trick them into moving somewhere they don't think you will be
+adding the dimension of a clock is interesting too
+
+3 hours agoJoshua Orion Skylar Hickman
+then it's basically street fighter
+
+3 hours agoMatthew Bunday
+I was unsure about whether the players should be able to see when one person has stopped the clock
+simulchess basically does become street fighter without the emphasis on raw reaction time and finger execution
+but there's a lot of strategy with the clock. Like if we say your clock stops whenever you submit a final move
+with public clocks, the other player might spend longer
+knowing you've locked into a move
+I'm not sure
+depends on how people want to use that resource I guess
+
+2 hours agoJoshua Orion Skylar Hickman
+I think the clocks get complicated fast
+my instincts say you should be able to change your move if you pay the clock cost from when you selected to when you changed
+which means people can do move arbitrage
+
+2 hours agoMatthew Bunday
+ooh
+that's a cool idea
+playing a little against myself, I wonder if this simultaneous move idea needs at least a modified version of chess
+oh also, I guess pieces can swap position?
+
+2 hours agoJoshua Orion Skylar Hickman
+yep
+on both
+
+2 hours agoMatthew Bunday
+it's weird when you have pawns phase through each other
+
+2 hours agoJoshua Orion Skylar Hickman
+pawns currently can kill themselves by moving where they can't capture
+
+2 hours agoMatthew Bunday
+hm
+
+2 hours agoJoshua Orion Skylar Hickman
+which I like
+
+2 hours agoMatthew Bunday
+ok, that's a good idea
+
+2 hours agoJoshua Orion Skylar Hickman
+but is confusing a little
+
+2 hours agoMatthew Bunday
+because the pawns have been a tricky issue
+I'm not sure what the best resolution is
+probably just to have a variant where none of the pieces have different movement and capture moves
+
+2 hours agoJoshua Orion Skylar Hickman
+the programmer in me says to resolve it in a way that isn't complex as all hell
+
+2 hours agoMatthew Bunday
+yeah
+Maybe pawns can move in any of the three spaces in front?
+
+2 hours agoJoshua Orion Skylar Hickman
+or only diagonally, maybe?
+only forward doesn't le them do anything interesting
+
+2 hours agoMatthew Bunday
+only diagonal would change all the openings quite a bit
+I guess you can advance two side by side pawns forward
+
+2 hours agoJoshua Orion Skylar Hickman
+I'm thinking letting them do diagonals at all accomplishes that
+
+2 hours agoMatthew Bunday
+so you can still get to the position of two pawns from the middle getting to d4 and d5 lol
+
+2 hours agoJoshua Orion Skylar Hickman
+okay, how about, pawns can move same as original -- where there was a pawn diagonally or forward
+no difference between move and capture rules after that
+?
+
+2 hours agoMatthew Bunday
+could you restate that, I'm not sure I grok it
+
+2 hours agoJoshua Orion Skylar Hickman
+then pawns can phase through each other
+so, if there's a pawn there now, you can move a pawn diagonally to attack
+the attack fails if he also moves, possibly attacking you, which causes them to phase through each other
+
+2 hours agoMatthew Bunday
+hm
+another weird case to consider
+
+2 hours agoJoshua Orion Skylar Hickman
+I like the game theory of it
+
+2 hours agoMatthew Bunday
+is say you have a rook trying to get from a1 to a8
+and a piece moves into a5
+does the rook get blocked?
+
+2 hours agoJoshua Orion Skylar Hickman
+I don't see why
+
+2 hours agoMatthew Bunday
+then we can do cool stuff like pawns jumping in front of the king to take a bullet
+which is awesome
+
+2 hours agoJoshua Orion Skylar Hickman
+lol, yes, but simultaneous means at the same time
+no rule saying the pawn gets in place before the attack
+strictly speaking, we could do arbitrary animations of pieces moving and never run into trouble with interference
+
+2 hours agoMatthew Bunday
+ok, but do we allow rooks to try to move past a pawn on the assumption the pawn might move?
+all the pieces could get teleportation ala the knight
+
+2 hours agoJoshua Orion Skylar Hickman
+the main issue is, what happens if they get it wrong
+because I can't think of something that couldn't be leveraged into being too useful
+
+2 hours agoMatthew Bunday
+I think the normal chess board might have too many pieces
+we might want to start with just two kings and add pieces we think will be interesting
+and maybe start kings in corners or some such
+a king with a rook, a bishop, and a queen is a damn intense game already
+
+2 hours agoJoshua Orion Skylar Hickman
+yeah, with 16 pieces I get the sense that my brain can't handle all of them at once
+
+2 hours agoMatthew Bunday
+yeah
+it's the same problem I had with simultaneous go. it was just too big of a problem
+
+2 hours agoJoshua Orion Skylar Hickman
+simultaneous go on a 5x5 might be a good place to start
+
+2 hours agoMatthew Bunday
+true true
+hm.
+go does have some nice properties
+for this sort of thing
+
+2 hours agoJoshua Orion Skylar Hickman
+okay, so the more I think about it, the more I think simulchess shouldn't have speculative moves
+
+2 hours agoMatthew Bunday
+I like that all the strategies are emergent properties
+the possibility of a rook moving through a piece on the possibility that the piece will move?
+
+2 hours agoJoshua Orion Skylar Hickman
+yeah, you can use it to probe too easily
+move as far into a space as they let you
+which is too good
+or your piece dies, which sucks too much
+
+2 hours agoMatthew Bunday
+I've thought about the probing... the cool thing is anything they can do you can too, BUT that still might be too weird/risky
+
+2 hours agoJoshua Orion Skylar Hickman
+it does impose a cost for predictability
+which might be good
+also makes the programming easier
+I'll make sure that piece is pluggable, I guess
+I get the feeling I'm going to think a bit more about archetecture before starting
+
+2 hours agoMatthew Bunday
+cool
+I think I'll sketch out a quick small simulgo
+because I do think using a smaller board will help clarify some issues
+
+2 hours agoJoshua Orion Skylar Hickman
+cool cool
+I'm having a hard time playing out a go scenario that leads to captures at all
+it all depends on what happens when two players try to play the same space
+
+2 hours agoMatthew Bunday
+my rule set so far has been to make that square gray and treat it as empty but impossible to move onto
+like a dead zone from nuclear fallout
+
+2 hours agoJoshua Orion Skylar Hickman
+yeah, that's one of the scenarios where I just keep routing around points until I reach the edge of the board or decide to go for someplace else
+but I'm not good at normal go, so who knows if that's what would happen
+
+2 hours agoMatthew Bunday
+that's the same problem I have. once I've coded it I need to actually find a good go player and get his strategic thoughts
+I'm awful at normal go compared to anyone who actually plays it
+
+2 hours agoJoshua Orion Skylar Hickman
+So I'll grab chess, you doing go?
+
+2 hours agoMatthew Bunday
+yes
