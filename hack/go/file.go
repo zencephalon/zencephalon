@@ -23,6 +23,21 @@ var (
    Stderr = newFile(syscall.Stderr, "/dev/stderr")
 )
 
+const (
+   O_RDONLY = syscall.O_RDONLY
+   O_RDWR = syscall.O_RDWR
+   O_CREATE = syscall.O_CREAT
+   O_TRUNC = syscall.O_TRUNC
+)
+
+func Open(name string) (file *File) {
+   return OpenFile(name, O_RDONLY, 0)
+}
+
+func Create(name string) (file *File, err os.Error) {
+   return OpenFile(name, O_RDWR|O_CREATE|O_TRUNC, 0666)
+}
+
 func OpenFile(name string, mode int, perm uint32) (file *File, err os.Error) {
    r, e := syscall.Open(name, mode, perm)
    if e != 0 {
@@ -61,3 +76,11 @@ func (file *File) Write(b []byte) (ret int, err os.Error) {
    r, e := syscall.Write(file.fd, b)
    if e != 0 {
       err = os.Errno(e)
+   }
+   return int(r), err
+}
+
+func (file *File) String() string {
+   return file.name
+}
+   
