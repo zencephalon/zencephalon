@@ -18,7 +18,8 @@ set mouse=a
 syntax on
 set hlsearch
 
-filetype plugin indent on
+filetype indent on
+filetype plugin on
 
 "if has('gui_running')
 "    set background=light
@@ -30,7 +31,6 @@ let g:solarized_termcolors=16
 colorscheme solarized
 "set guicursor+=a:blinkon0
 
-filetype plugin on
 
 set et
 set sw=3

@@ -28,4 +28,5 @@
 .wicd
 .ssh
 dl
+hack/go
 .*
