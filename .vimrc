@@ -11,6 +11,8 @@ set incsearch
 
 map Q gq
 
+set cc=80
+
 inoremap <C-U> <C-G>u<C-U>
 
 set mouse=a
