@@ -1,0 +1,19 @@
+Norwegian vowels->vokalene can be tricky, there are some new ones.
+
+In Norwegian each vowel can be long->lang. Generally, if a vowel is followed
+by two consonants->konsonantene then it is short->kort. If a vowel is followed
+by only one consonant then it is usually long.
+
+  Short Long
+a katt  tak
+e legge lege
+i inne  mine
+o rom   Polen
+u Unni  bus
+y fylle by
+æ færre fæl
+ø øst   øve
+å åtte  Åse
+
+Sometimes the letter 'o' is pronounced as 'å' as in 'komme', 'sommer'.
+Sometimes the letter 'u' is pronounced as 'o' as in 'ung', 'tung', 'dum'.
